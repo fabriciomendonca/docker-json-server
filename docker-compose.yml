@@ -1,0 +1,23 @@
+version: '2'
+services:
+  server:
+    image: json-server
+    volumes:
+      - "$PWD/.:/data"
+    labels:
+      - traefik.enable=true
+      - traefik.backend=server
+      - traefik.port=80
+      - traefik.frontend.rule=PathPrefix:/
+  traefik:
+    image: traefik:1.3-alpine
+    container_name: traefik
+    command: --docker --docker.exposedbydefault=false --docker.watch --docker.domain=localhost --web --web.statistics --web.metrics --insecureskipverify --file /etc/traefik/traefik.toml
+    ports:
+      - 8080:8080
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./certs/:/etc/traefik/certs/
+      - ./traefik.toml:/etc/traefik/traefik.toml
