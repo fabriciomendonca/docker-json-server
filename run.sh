@@ -1,20 +1,8 @@
 #!/bin/sh
 
-args="$@"
-
-args="$@ -p 80"
-
-file=/data/db.json
+file=/data/server.js
 if [ -f $file ]; then
-    echo "Found db.json, trying to open"
-    args="$args db.json"
+    echo "Found server file"
 fi
 
-file=/data/file.js
-if [ -f $file ]; then
-    echo "Found file.js seed file, trying to open"
-    args="$args file.js"
-fi
-
-echo "With args: $args"
-json-server $args
+node server.js
