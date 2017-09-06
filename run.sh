@@ -5,4 +5,5 @@ if [ -f $file ]; then
     echo "Found server file"
 fi
 
-node server.js
+cp -R /custom-data/. /data/
+nodemon server.js
