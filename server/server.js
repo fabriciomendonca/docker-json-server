@@ -3,9 +3,9 @@ const fs = require('fs');
 const path = require('path');
 const jsonServer = require('json-server');
 const app = jsonServer.create();
-const router = jsonServer.router(path.join(__dirname, 'db.json'));
+const router = jsonServer.router(path.join(__dirname, '/custom/db.json'));
 const middlewares = jsonServer.defaults({
-  static: path.join(__dirname, '../public')
+  static: path.join(__dirname, './public')
 });
 
 app.use((req, res, next) => {
@@ -17,25 +17,37 @@ app.use((req, res, next) => {
   next();
 });
 
+const customStaticsFilePath = path.join(__dirname, '/custom/statics.json');
+if (fs.existsSync(customStaticsFilePath)) {
+  const requests = JSON.parse(fs.readFileSync(customStaticsFilePath));
+  requests.forEach((request) => {
+    app[request.method](request.url, (req, res) => {
+      let filePath = request.file.path;
+      if (request.file.is_relative) {
+        filePath = path.join(__dirname, filePath);
 
-app.get('/recebimento/bundle.js', (req, res) => {
-  const bundle = fs.readFileSync(path.join(__dirname, '../public/bundle.js'));
-  res.send(bundle);
-});
+        res.send(fs.readFileSync(filePath));
+      } else {
+        https.get(filePath, response => {
+          let body = '';
+          response.on('data', (content) => {
+            body += content;
+          });
 
-app.get('/recebimento/style.css', (req, res) => {
-  const bundle = fs.readFileSync(path.join(__dirname, '../public/style.css'));
-  res.send(bundle);
-});
+          response.on('end', () => {
+            res.send(body);
+          })
+        });
+      }
+    });
+  });
+}
 
-
-app.use(jsonServer.rewriter({
-  '/discovery/api/commands/*': '/$1',
-  '/discovery/api/queries/searchs': '/searchs',
-  '/discovery/api/*': '/$1',
-  '/identidades/oauth/token': '/token',
-  '/identidades/user': '/user'
-}));
+const routesFilePath = path.join(__dirname, '/custom/routes.json');
+if (fs.existsSync(routesFilePath)) {
+  const routes = fs.readFileSync(routesFilePath);
+  app.use(jsonServer.rewriter(JSON.parse(routes)));
+}
 
 app.use(middlewares);
 app.use(router);
