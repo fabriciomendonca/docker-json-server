@@ -1,9 +1,9 @@
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
+const _ = require('lodash');
 const jsonServer = require('json-server');
 const app = jsonServer.create();
-const router = jsonServer.router(path.join(__dirname, '/custom/db.json'));
 const middlewares = jsonServer.defaults({
   static: path.join(__dirname, './public')
 });
@@ -49,6 +49,19 @@ if (fs.existsSync(routesFilePath)) {
   app.use(jsonServer.rewriter(JSON.parse(routes)));
 }
 
+let db = JSON.parse(fs.readFileSync(path.join(__dirname, '/custom/db.json')));
+const customDbPath = path.join(__dirname, '/custom/custom-db.json');
+
+if (fs.existsSync(customDbPath)) {
+  const customDb = JSON.parse(fs.readFileSync(customDbPath));
+  _.mergeWith(db, customDb, (obj, src) => {
+    if (_.isArray(obj)) {
+      return obj.concat(src);
+    }
+  });
+}
+
+const router = jsonServer.router(db);
 app.use(middlewares);
 app.use(router);
 
