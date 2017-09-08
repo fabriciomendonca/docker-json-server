@@ -1,9 +1,8 @@
 #!/bin/sh
 
-file=/data/server.js
+file=/data/custom/server.js
 if [ -f $file ]; then
-    echo "Found server file"
+    nodemon custom/server.js
+else
+    nodemon server.js
 fi
-
-cp -R /custom-data/. /data/
-nodemon server.js
