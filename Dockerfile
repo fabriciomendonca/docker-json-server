@@ -12,5 +12,5 @@ EXPOSE 8000
 
 ADD run.sh /run.sh
 
-ENTRYPOINT ["sh", "/run.sh"]
+ENTRYPOINT ["/run.sh"]
 CMD []
