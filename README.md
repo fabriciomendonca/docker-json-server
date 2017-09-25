@@ -5,7 +5,7 @@ This is a [docker](https://www.docker.io) image that eases setup. [1](https://gi
 
 It was initially forked from the [docker-json-server](https://github.com/clue/docker-json-server) project because the [supremotribunalfederal](https://github.com/supremotribunalfederal) team was in need to run it over https in a lightweight image, so we decided to refactor the original project and create a new image using [Alpine](https://alpinelinux.org/) a self signed certificate.
 
-The server will run with the [nodemon]() library, so it is possible to update the JSON files and server restarts automatically.
+The server will run with the [nodemon](https://nodemon.io/) library, so it is possible to update the JSON files and server restarts automatically.
 
 > NOTE: Nodemon will not work properly if you are using VM Ware because the container can not see that the file were changed in the host.
 
