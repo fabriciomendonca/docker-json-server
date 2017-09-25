@@ -23,7 +23,7 @@ examples/basic/custom
 This command runs from the example folder mapping the container port 8000 to host port 8443.
 
 ```
-docker run -d -p 8443:8000 -v $PWD/basic/custom:/data/custom json-server-https
+docker run -d -p 8443:8000 -v $PWD/basic/custom:/data/custom fabriciomendonca/json-server-https
 ```
 
 To see your json-server running:
