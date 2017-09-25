@@ -7,9 +7,7 @@ It was initially forked from the [docker-json-server](https://github.com/clue/do
 
 The server will run with the [nodemon]() library, so it is possible to update the JSON files and server restarts automatically.
 
-```
-NOTE: It will not work if you are using VM Ware because the container can not see that the file were changed in the host.
-```
+> NOTE: Nodemon will not work properly if you are using VM Ware because the container can not see that the file were changed in the host.
 
 If you don't need to run the json-server over HTTPS, please use the original [json-server](https://hub.docker.com/r/clue/json-server/) image. You can also [write your own server.js file] and run it over HTTP, but I do recommend to use docker-json-server image in this case.
 
