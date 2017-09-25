@@ -1,0 +1,15 @@
+{
+  "users": {
+    "id": 123,
+    "username": "fabriciomendonca",
+    "full_name": "Fabricio Mendonca Rodrigues"
+  },
+  "posts": [
+    {
+      "id": "1",
+      "title": "Lorem ipsum",
+      "description": "Lorem ipsum dolor sit amet...",
+      "user": 123
+    }
+  ]
+}
