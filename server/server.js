@@ -5,7 +5,7 @@ const _ = require('lodash');
 const jsonServer = require('json-server');
 
 const routesFilePath = path.join(__dirname, '/custom/routes.json');
-let rewriter = {};
+let rewriter;
 if (fs.existsSync(routesFilePath)) {
   const routes = fs.readFileSync(routesFilePath);
   rewriter = jsonServer.rewriter(JSON.parse(routes));
@@ -26,9 +26,11 @@ if (fs.existsSync(customDbPath)) {
 const router = jsonServer.router(db);
 
 const app = jsonServer.create();
-const middlewares = jsonServer.defaults({
-  static: path.join(__dirname, './public')
-});
+let middlewaresOptions = {};
+if (fs.existsSync()) {
+  middlewaresOptions.static = path.join(__dirname, './public')
+}
+const middlewares = jsonServer.defaults(middlewaresOptions);
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -66,7 +68,9 @@ if (fs.existsSync(customStaticsFilePath)) {
   });
 }
 
-app.use(rewriter);
+if (rewriter) {
+  app.use(rewriter);
+}
 app.use(middlewares);
 app.use(router);
 
