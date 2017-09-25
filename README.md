@@ -1,80 +1,35 @@
-# docker-json-server
+# docker-json-server-https
 
 [JSON Server](https://github.com/typicode/json-server) provides REST API mocking based on plain JSON.
-This is a [docker](https://www.docker.io) image that eases setup.
+This is a [docker](https://www.docker.io) image that eases setup. [1](https://github.com/clue/docker-json-server)
 
-## Usage
+It was initially forked from the [docker-json-server](https://github.com/clue/docker-json-server) project because the [supremotribunalfederal](https://github.com/supremotribunalfederal) team was in need to run it over https in lightweight image, so we decided to refactor the original project and create a new image using a self signed certificate.
 
-This docker image is available as a [trusted build on the docker index](https://index.docker.io/u/clue/json-server/),
-so there's no setup required.
-Using this image for the first time will start a download automatically.
-Further runs will be immediate, as the image will be cached locally.
+If you don't need to run the json-server over HTTPS, please use the original [json-server]() image. You can also [write your own server.js file] and run it over HTTP, but I do recommend to use docker-json-server image in this case.
 
-The recommended way to run this container looks like this:
+## Basic Usage
 
-```bash
-$ docker run -d -p 80:80 -v /home/user/articles.json:/data/db.json clue/json-server
-```
-
-The above example exposes the JSON Server REST API on port 80, so that you can now browse to:
+To run this image you will need to create a folder where you will store your JSON files. (see [basic example]())
 
 ```
-http://localhost/
+example/basic/custom
+  db.json
 ```
 
-This is a rather common setup following docker's conventions:
+This command runs from the example folder mapping the container port 8000 to host port 8443.
 
-* `-d` will run a detached instance in the background
-* `-p {OutsidePort}:80` will bind the webserver to the given outside port
-* `-v {AbsolutePathToJsonFile}:/data/db.json` should be passed to mount the given JSON file into the container
-* `clue/json-server` the name of this docker image
-
-### Help
-
-You can supply any number of JSON Server arguments that will be passed through unmodified.
-
-```bash
-$ docker run -it --rm clue/json-server --help
 ```
+docker run -d -p 8443:8000 -v $PWD/basic/custom:/data/custom json-server-https
+```
+
+To see your json-server running:
+
+```
+https://localhost:8443
+```
+
+### The custom folder
 
 ### JSON source
 
-If you mount a file to `/data/db.json` (as in the above example),
-it will automatically be used as the plain JSON data source file.
 
-A sample file could look like this:
-
-```json
-{
-  "posts": [
-    { "id": 1, "body": "foo" },
-    { "id": 2, "body": "bar" }
-  ],
-  "comments": [
-    { "id": 1, "body": "baz", "postId": 1 },
-    { "id": 2, "body": "qux", "postId": 2 }
-  ]
-}
-```
-
-### JS seed file
-
-If you mount a file to `/data/file.js`,
-it will automatically be used as a JS seed file.
-
-JSON Server expects JS files to export a function that returns an object.
-Seed files are useful if you need to programmaticaly create a lot of data.
-
-A sample file could look like this:
-
-```javascript
-module.exports = function() {
-  var data = {};
-
-  data.posts = [];
-  data.posts.push({ id: 1, body: 'foo' });
-  //...
-
-  return data;
-}
-```
