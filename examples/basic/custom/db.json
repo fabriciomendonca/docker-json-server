@@ -8,7 +8,7 @@
   ],
   "posts": [
     {
-      "id": "1",
+      "id": 1,
       "title": "Lorem ipsum",
       "description": "Lorem ipsum dolor sit amet...",
       "user": 123

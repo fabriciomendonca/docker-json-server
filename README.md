@@ -36,6 +36,37 @@ Try changing your db.json file and refresh the browser to see the changes reflec
 
 ### The custom folder
 
+It is possible to store your JSON database in any folder inside your project, all you have to do is map them to the `/data/custom` folder in the container.
+
 ### JSON source
 
+[JSON Server](https://github.com/typicode/json-server) will convert all first level properties of your `db.json` file into an endpoint.
 
+```json
+{
+  "users": [
+    {
+      "id": 123,
+      "username": "fabriciomendonca",
+      "full_name": "Fabricio Mendonça Rodrigues"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "Lorem Ipsum",
+      "description": "Lorem Ipsum dolor sit amet...",
+      "user": 123
+    }
+  ]
+}
+```
+
+The server will provide these endpoints:
+
+```
+https://localhost:8443/users
+https://localhost:8443/posts
+```
+
+Please see the [JSON Server documentation](https://github.com/typicode/json-server) for further information.
