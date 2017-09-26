@@ -13,7 +13,7 @@ If you don't need to run the json-server over HTTPS, please use the original [js
 
 ## Basic Usage
 
-To run this image you will need to create a folder where you will store your JSON files. (see [basic example](https://github.com/fabriciomendonca/docker-json-server-https/tree/master/examples/basic))
+To run this image you will need to create a folder where you will store your JSON files. [basic example](https://github.com/fabriciomendonca/docker-json-server-https/tree/master/examples/basic)
 
 ```
 examples/basic/custom
@@ -73,7 +73,7 @@ Please see the [JSON Server documentation](https://github.com/typicode/json-serv
 
 ## URL Rewriting
 
-If you have to rewrite URLs or match some patterns, just create a `routes.json` file inside your mapped folder. (See [rewrite example](https://github.com/fabriciomendonca/docker-json-server-https/tree/master/examples/rewrite))
+If you have to rewrite URLs or match some patterns, just create a `routes.json` file inside your mapped folder. [rewrite example](https://github.com/fabriciomendonca/docker-json-server-https/tree/master/examples/rewrite)
 
 ```json
 {
@@ -86,12 +86,12 @@ If you have to rewrite URLs or match some patterns, just create a `routes.json` 
 
 ## Public folder
 
-Map a folder with your static files to /data/public folder in the container. (See [public folder example](https://github.com/fabriciomendonca/docker-json-server-https/tree/master/examples/public_folder))
+Map a folder with your static files to /data/public folder in the container. [public folder example](https://github.com/fabriciomendonca/docker-json-server-https/tree/master/examples/public_folder)
 
 ```
 docker run -d -p 8443:8000 -v $PWD/examples/public_folder/custom:/data/custom \
--v $PWD/examples/public_folder/dist:/data/public \
-fabriciomendonca/json-server-https
+  -v $PWD/examples/public_folder/dist:/data/public \
+  fabriciomendonca/json-server-https
 ```
 
 Then access the URL `https://localhost:8443/static.js`
