@@ -1,0 +1,6 @@
+{
+  "/posts/:id/comments": "/comments?postId=:id",
+  "/api/*": "/$1",
+  "/identities/users": "/users",
+  "/identities/users/*": "/users/$1"
+}
