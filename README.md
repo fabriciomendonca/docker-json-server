@@ -83,3 +83,15 @@ If you have to rewrite URLs or match some patterns, just create a `routes.json` 
   "/identities/users/*": "/users/$1"
 }
 ```
+
+## Public folder
+
+Map a folder with your static files to /data/public folder in the container. (See [public folder example](https://github.com/fabriciomendonca/docker-json-server-https/tree/master/examples/public_folder))
+
+```
+docker run -d -p 8443:8000 -v $PWD/examples/public_folder/custom:/data/custom \
+-v $PWD/examples/public_folder/dist:/data/public \
+fabriciomendonca/json-server-https
+```
+
+Then access the URL `https://localhost:8443/static.js`
