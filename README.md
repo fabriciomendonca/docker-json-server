@@ -95,3 +95,18 @@ docker run -d -p 8443:8000 -v $PWD/examples/public_folder/custom:/data/custom \
 ```
 
 Then access the URL `https://localhost:8443/static.js`
+
+## Merge db.json files
+
+It is also possible to merge two different db.json files. This is useful when you have some default endpoints shared with multiple modules and aplications and are working in a module of your project that will have its specifcs endpoints that will not be shared.
+
+Inside your project custom folder, create a file named `custom-db.json`
+
+The [custom db example]() maps the `json-server` folder from the rewrite example and the `custom-db.json` file inside it as `/data/custom/custom-db.js`, the file to be merged with the main JSON database file.
+
+```
+docker run -d -p 8443:8000 \
+  -v $PWD/examples/rewrite/json-server:/data/custom \
+  -v $PWD/examples/custom_db/custom-db.json
+  fabriciomendonca/json-server-https
+```
