@@ -122,6 +122,8 @@ docker run -d -p 8443:8000 \
   fabriciomendonca/json-server-https
 ```
 
+And the `statics.json` file will be like this:
+
 ```json
 [
   {
