@@ -9,7 +9,7 @@ The server will run with the [nodemon](https://nodemon.io/) library, so it is po
 
 > NOTE: Nodemon will not work properly if you are using VM Ware because the container can not see that the file were changed in the host.
 
-If you don't need to run the json-server over HTTPS, please use the original [json-server](https://hub.docker.com/r/clue/json-server/) image. You can also [write your own server.js file] and run it over HTTP, but I do recommend to use docker-json-server image in this case.
+If you don't need to run the json-server over HTTPS, please use the original [json-server](https://hub.docker.com/r/clue/json-server/) image. You can also write your own `server.js` file and run it over HTTP, but I do recommend to use docker-json-server image in this case.
 
 ## Basic Usage
 
