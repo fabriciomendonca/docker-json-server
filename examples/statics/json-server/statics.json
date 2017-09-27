@@ -1,0 +1,20 @@
+[
+  {
+    "method": "get",
+    "url": "/examples/statics/external.js",
+    "file": {
+      "path": "https://raw.githubusercontent.com/fabriciomendonca/docker-json-server-https/master/examples/public_folder/dist/static.js",
+      "is_relative": false,
+      "content_type": "application/javascript"
+    }
+  },
+  {
+    "method": "get",
+    "url": "/some/static/file.css",
+    "file": {
+      "path": "./volumex/file.css",
+      "is_relative": true,
+      "content_type": "text/css"
+    }
+  }
+]
