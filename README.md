@@ -107,6 +107,40 @@ The [custom db example]() maps the `json-server` folder from the rewrite example
 ```
 docker run -d -p 8443:8000 \
   -v $PWD/examples/rewrite/json-server:/data/custom \
-  -v $PWD/examples/custom_db/custom-db.json
+  -v $PWD/examples/custom_db/custom-db.json:/data/custom/custom-db.json
   fabriciomendonca/json-server-https
+```
+
+## Serving static files in a different way
+
+You can add a `statics.json` file to tell the server to rewrite specific URLs and serve the file using the configured Content-Type header. The file can be hosted on a remote server or another folder in the host file system.
+
+```
+docker run -d -p 8443:8000 \
+  -v $PWD/examples/statics/json-server:/data/custom \
+  -v $PWD/examples/statics/volumex:/data/volumex \
+  fabriciomendonca/json-server-https
+```
+
+```json
+[
+  {
+    "method": "get",
+    "url": "/examples/statics/external.js",
+    "file": {
+      "path": "https://raw.githubusercontent.com/fabriciomendonca/docker-json-server-https/master/examples/public_folder/dist/static.js",
+      "is_relative": false,
+      "content_type": "application/javascript"
+    }
+  },
+  {
+    "method": "get",
+    "url": "/some/static/file.css",
+    "file": {
+      "path": "./volumex/file.css",
+      "is_relative": true,
+      "content_type": "text/css"
+    }
+  }
+]
 ```
