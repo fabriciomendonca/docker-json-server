@@ -1,0 +1,16 @@
+{
+  "comments": [
+    {
+      "id": 2,
+      "title": "Merged comment",
+      "description": "Merged comment description"
+    }
+  ],
+  "images": [
+    {
+      "id": 1,
+      "url": "http://lorempixel.com/400/200/",
+      "alt": "Lorem pixel..."
+    }
+  ]
+}
